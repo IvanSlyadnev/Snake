@@ -66,17 +66,39 @@ public class Snake {
         this.head = imageHead.getImage();
         ImageIcon imageTail = new ImageIcon(tail_address);
         this.tail = imageTail.getImage();
+    }
 
+    public void setDirection() {
+        this.direction = this.getAvoidDirection();
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public void setCoordinates(int [] x, int [] y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    private String getAvoidDirection() {
+        return switch (this.direction) {
+            case "right" -> "left";
+            case "left" -> "right";
+            case "up" -> "down";
+            case "down" -> "up";
+            default -> null;
+        };
     }
 
     public Image getImage () {
         return this.image;
     }
     public Image getHead() {
-        return head;
+        return this.head;
     }
     public Image getTail () {
-        return tail;
+        return this.tail;
     }
 
 }

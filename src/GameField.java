@@ -8,14 +8,14 @@ import java.io.IOException;
 
 public class GameField extends JPanel implements ActionListener {
     private int speed = 300;
-    private final int SIZE = 325;
+    private final int SIZE = 425;
     private final int DOT_SIZE = 16;
     private final int ALL_DOTS = 400;
     private final int dots = 3;
     public  FileWorker fileWorker = new FileWorker("file.txt");
     private Snake snake = new Snake(dots, DOT_SIZE, ALL_DOTS);
-    private Apple apple = new Apple(DOT_SIZE);
-    private Image background;
+    private final Apple apple = new Apple(DOT_SIZE);
+    private final Image background;
     private boolean stop = false;
     public boolean inGame = true;
     public Timer timer;
@@ -140,12 +140,8 @@ public class GameField extends JPanel implements ActionListener {
                     y_[c] = snake.y[i];
                     c++;
                 }
-                snake.x = x_;
-                snake.y = y_;
-                if (snake.direction == "right") snake.direction = "left";
-                else if (snake.direction == "left") snake.direction = "right";
-                else if (snake.direction == "u p") snake.direction = "down";
-                else if (snake.direction == "down") snake.direction = "up";
+                snake.setCoordinates(x_, y_);
+                snake.setDirection();
             }
         }
 
