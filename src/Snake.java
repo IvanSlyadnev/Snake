@@ -91,6 +91,14 @@ public class Snake {
         };
     }
 
+    public int [] getX() {
+        return this.x;
+    }
+
+    public int [] getY() {
+        return this.y;
+    }
+
     public Image getImage () {
         return this.image;
     }
