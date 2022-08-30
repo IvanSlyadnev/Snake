@@ -8,6 +8,8 @@ public class Apple {
     private Image image;
     private int DOT_SIZE;
 
+    private int [][] cors_ = new int[400][2];
+
     public Apple(int DOT_SIZE) {
         this.DOT_SIZE = DOT_SIZE;
     }
@@ -18,59 +20,44 @@ public class Apple {
     }
 
     public void create(Snake snake){
-        /*int [] y_ = new int[snake.y.length];
-
-        if (snake.score == 21) {
-            snake.score = 21;
-        }
-        int xc = 0;
-        int yc = 0;
-        int [] kors = new int[20];
-        for (int i = 0; i < kors.length; i++) {
-            kors[i] = i;
-        }
-
-        int [] x_ = new int[snake.x.length];
-        for (int i = 0; i < snake.x.length; i++) {
-            if (snake.x[i] != 0 && !checkInArray(x_,snake.x[i]/snake.DOT_SIZE)) {
-                x_[xc] = snake.x[i]/snake.DOT_SIZE;
-                xc++;
-            }
-            if (snake.y[i] != 0) {
-                y_[yc] = snake.y[i]/snake.DOT_SIZE;
-                yc++;
+        int c = 0;
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                this.cors_[c][0] = j;
+                this.cors_[c][1] = i;
+                c++;
             }
         }
 
-        int [] xApple = new int[20];
-        int [] yApple = new int[20];
-
-        xc = 0; yc = 0;
-
-        for (int i = 0; i < kors.length; i++) {
-            if (!checkInArray(x_, kors[i])) {
-               xApple[xc] = kors[i];
-               xc++;
-            }
-            if (!checkInArray(y_, kors[i])) {
-                yApple[yc] = kors[i];
-                yc++;
-            }
+        int [][] cors = new int[snake.dots][2];
+        for(int i =0; i < snake.dots; i++) {
+            cors[i][0] = snake.getX()[i]/DOT_SIZE;
+            cors[i][1] = snake.getY()[i]/DOT_SIZE;
         }
+        int [][] free_cors = this.getFreeCoordinates(cors);
+        int [] random_cor = free_cors[new Random().nextInt(free_cors.length)];
 
-        this.x = xApple[new Random().nextInt(xc)]*DOT_SIZE;
-        this.y = yApple[new Random().nextInt(yc)]*DOT_SIZE;
-*/
-        this.x = new Random().nextInt(19) * DOT_SIZE;
-        this.y = new Random().nextInt(19) * DOT_SIZE;
-
+        this.x = random_cor[0] * DOT_SIZE;
+        this.y = random_cor[1] * DOT_SIZE;
     }
 
-    private boolean checkInArray(int[] mass, int value) {
-        for (int i = 0; i < mass.length; i++) {
-            if (mass[i] == value) return true;
+    private boolean checkInArray(int[] mass, int [][] array) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i][0] == mass[0] && array[i][1] == mass[1]) return true;
         }
         return false;
+    }
+
+    private int [][] getFreeCoordinates(int [][] cors) {
+        int [][] free_cors = new int[400-cors.length][2];
+        int counter = 0;
+        for (int [] cor : this.cors_) {
+            if (!this.checkInArray(cor, cors)) {
+                free_cors[counter] = cor;
+                counter++;
+            }
+        }
+        return free_cors;
     }
 
     public int getX(){
