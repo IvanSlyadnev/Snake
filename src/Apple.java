@@ -10,6 +10,8 @@ public class Apple {
 
     private int [][] cors_ = new int[400][2];
 
+    private String [] images = {"apple.png"};
+
     public Apple(int DOT_SIZE) {
         this.DOT_SIZE = DOT_SIZE;
     }
@@ -39,6 +41,8 @@ public class Apple {
 
         this.x = random_cor[0] * DOT_SIZE;
         this.y = random_cor[1] * DOT_SIZE;
+
+        this.loadImage(this.images[new Random().nextInt(this.images.length)]);
     }
 
     private boolean checkInArray(int[] mass, int [][] array) {

@@ -37,7 +37,6 @@ public class GameField extends JPanel implements ActionListener {
 
     public void loadImages() {
         snake.loadImage("dot.png", "snake.png", "tail.png");
-        apple.loadImage("apple.png");
     }
 
     public void checkApple() {
