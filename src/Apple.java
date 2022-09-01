@@ -55,6 +55,7 @@ public class Apple {
     private int [][] getFreeCoordinates(int [][] cors) {
         int [][] free_cors = new int[400-cors.length][2];
         int counter = 0;
+        //System.out.println(this.cors_.length);
         for (int [] cor : this.cors_) {
             if (!this.checkInArray(cor, cors)) {
                 free_cors[counter] = cor;

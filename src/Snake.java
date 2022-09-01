@@ -54,9 +54,16 @@ public class Snake {
             if (dots >= 4 && x[0] == x[i] && y[0] == y[i]) return true;
         }
 
-        if (x[0] < 0 || x[0] >SIZE-5) return true;
-        if (y[0] < 0 || y[0] >SIZE) return true;
+        //if (x[0] < 0 || x[0] >SIZE-5) return true;
+        //if (y[0] < 0 || y[0] >SIZE) return true;
         return false;
+    }
+    public void throughWalls(int size) {
+        if (this.x[0] < 0) this.x[0] = size-16;
+        if (this.x[0] > size-5) this.x[0] = 0;
+
+        if (this.y[0] < 0) this.y[0] = size-16;
+        if (this.y[0] > size-5) this.y[0] = 0;
     }
 
     public void loadImage(String image_address, String head_address,String tail_address) {
