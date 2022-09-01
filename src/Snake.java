@@ -12,6 +12,8 @@ public class Snake {
     private Image tail;
     public String direction;
 
+    private int lives = 3;
+
     public Snake(int dots, int DOTS_SIZE, int ALL_DOTS) {
         this.direction = "right";
         x = new int[ALL_DOTS];
@@ -51,12 +53,20 @@ public class Snake {
 
     public boolean checkCollision(int SIZE) {
         for (int i = 1; i < dots; i++) {
-            if (dots >= 4 && x[0] == x[i] && y[0] == y[i]) return true;
+            if (dots >= 4 && x[0] == x[i] && y[0] == y[i]) {
+                this.dots = Math.max(i, 4);
+                int [] x_ = new int[this.x.length];
+                int [] y_ = new int[this.y.length];
+                for (int j = 0; j < this.dots; ++j) {
+                    x_[j] = x[j];
+                    y_[j] = y[j];
+                }
+                x = x_;
+                y = y_;
+                return true;
+            }
         }
-
-        //if (x[0] < 0 || x[0] >SIZE-5) return true;
-        //if (y[0] < 0 || y[0] >SIZE) return true;
-        return false;
+        return (x[0] < 0 || x[0] >SIZE-5) || (y[0] < 0 || y[0] >SIZE-5);
     }
     public void throughWalls(int size) {
         if (this.x[0] < 0) this.x[0] = size-16;
@@ -114,6 +124,14 @@ public class Snake {
     }
     public Image getTail () {
         return this.tail;
+    }
+
+    public int getLives() {
+        return this.lives;
+    }
+
+    public void minus_live() {
+        this.lives--;
     }
 
 }

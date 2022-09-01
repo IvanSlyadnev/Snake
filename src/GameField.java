@@ -51,7 +51,7 @@ public class GameField extends JPanel implements ActionListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(background, 0, 0, this);
-        String info = "Apples " + Integer.toString(snake.score);
+        String info = "Apples " + Integer.toString(snake.score) + "; Lives " + Integer.toString(snake.getLives());
         if (inGame) {
             g.setColor(Color.RED);
             g.drawString(info, 0, 10);
@@ -95,10 +95,13 @@ public class GameField extends JPanel implements ActionListener {
                 timer.start();
                 checkApple();
                 //System.out.println(snake.getX()[0] + " - " +  snake.getY()[0] + " : " + apple.getX() + " - " + apple.getY());
-                snake.throughWalls(320);
-                if (snake.checkCollision(SIZE)) {
-                    inGame = false;
+                if (snake.checkCollision(320)) {
+                    snake.minus_live();
+                    if (snake.getLives() == 0) {
+                        inGame = false;
+                    }
                 }
+                snake.throughWalls(320);
                 snake.move();
             }
             repaint();
