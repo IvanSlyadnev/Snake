@@ -94,7 +94,7 @@ public class GameField extends JPanel implements ActionListener {
                 timer = new Timer(getTime(snake.score), this);
                 timer.start();
                 checkApple();
-                if (snake.checkCollision(SIZE)) {
+                if (snake.checkCollision(325)) {
                     inGame = false;
                 }
                 snake.move();
